@@ -159,21 +159,18 @@ async def dmall(ctx, role_arg, *args):
     for role in ctx.guild.roles:
         if role.name.upper() == role_arg.upper():
             listRole.append(role)
-            await ctx.send(role.name)
     # on établit la liste des personnes concernées
     destinataires = []
     for member in ctx.guild.members:
         for role in listRole:
             if member not in destinataires and role in member.roles and not member.bot:
                 destinataires.append(member)
-                await ctx.send(member.name)
     # on récupère les fichiers attachés
     attachmentList = []
     for attachment in ctx.message.attachments:
         attachmentList.append(await attachment.to_file())
     # on envoie le message à chaque personne concernée
     for destinataire in destinataires:
-        await ctx.send("send")
         await destinataire.send(content=" ".join(args), files=attachmentList)
 
 # **************************************************************************
